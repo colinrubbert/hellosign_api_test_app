@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
-
+<div class="col-xs-10 col-xs-offset-1">
 <h1>Listing Topics</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Title</th>
@@ -26,4 +26,5 @@
 
 <br>
 
-<%= link_to 'New Topic', new_topic_path %>
+<%= link_to 'New Topic', new_topic_path, class: 'btn btn-default' %>
+</div>

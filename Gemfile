@@ -27,6 +27,8 @@ gem 'devise'
 # Hellosign Ruby SDK
 gem 'hellosign-ruby-sdk'
 
+# Bootstrap-Sass
+gem 'bootstrap-sass'
 
 gem 'sdoc', '~> 0.4.0', group: :doc
 
