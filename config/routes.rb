@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
-  post '/signatures/callbacks',
-    to: 'signatures#callbacks'
+  resources :signatures, only: [:new, :create] do
+    collection do
+      post 'callbacks'
+    end
+  end
 
   devise_for :users
   resources :topics
-  
+
   root 'topics#index'
 
 end

@@ -1,0 +1,11 @@
+<br />
+<br />
+<div class="col-xs-10 col-xs-offset-1">
+  <%= form_tag signatures_path, method: :post do %>
+    <%=label_tag 'Full Name' %><br />
+    <%= text_field_tag :name%><br /><br />
+    <%= label_tag 'Email' %><br />
+    <%= text_field_tag :email %><br /><br />
+    <%= submit_tag 'Create Embedded Signature Request' %>
+  <% end %>
+</div>
