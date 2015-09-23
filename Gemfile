@@ -30,6 +30,9 @@ gem 'hellosign-ruby-sdk'
 # Bootstrap-Sass
 gem 'bootstrap-sass'
 
+# Storing data in environment envariables
+gem 'figaro'
+
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use ActiveModel has_secure_password
