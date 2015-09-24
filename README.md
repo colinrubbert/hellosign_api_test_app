@@ -40,3 +40,4 @@ example: http://96edccba.ngrok.io/signatures/callbacks
 ```
 * Once we have inputed this data, `ngrok` and `rails s` are still running lets push the "test" button to assure this is working. We should receive a `200 OK` message in our `ngrok` window and `Success! "Hello API Event Received" was found in the response` in our hellosign API app dashboard
 * *WARNING* If you are using the free version of `ngrok` each time you stop your tunnels and restart them the web address will change. If you want a persistent web address you will have to pay for `ngrok`.
+* In order to test whether or not your callbacks and embedded forms work you will need to test with your `ngrok` domain and _NOT_ with `localhost`. HelloSign does not allow for testing with localhost callbacks.

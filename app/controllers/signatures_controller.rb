@@ -9,40 +9,25 @@ class SignaturesController < ApplicationController
   end
 
   def create
-    embedded_request = create_embedded_request(name: params[:name], email: params[:email])
-    @sign_url = get_sign_url(embedded_request)
-    render :embedded_request
-  end
-
-  private
-
-  def create_embedded_request(opts = {})
-    HelloSign.send_request_with_template(
+    client = HelloSign::Client.new :api_key => ENV["hellosign_api_key"]
+    client.create_embedded_signature_request_with_template(
     :test_mode => 1,             #Set to 1 to signify this is just a test
+    :client_id => ENV["hellosign_client_id"],
     :template_id => ENV["agent_w9_form"],
-    :title => 'Agent W9 Tax Form',
     :subject => "Your W9 Form",
-    :message => "Please fill out all relevant information, sign, and date.",
+    :message => "Please fill out all relevant information, sign, date.",
     :signers => [
-      {
-        # Email addresses of reciepients
-        email_address: opts[:email],
-        name: opts[:name]
-      }
-    ],
-    :custom_fields => {
-      # These will be custom fields that need to be filled out
-    }
+        {
+          :name => "Colin Rubbert",
+          :email_address => "colinrubbert@gmail.com",
+          :role => 'Agent'
+        }
+      ],
     )
-  end
 
-  def get_sign_url(embedded_request)
-    sign_id = get_first_signature_id(embedded_request)
-    Hellosign.get_embedded_sign_url(signature_id: sign_id).sign_url
-  end
-
-  def get_first_signature_id(embedded_request)
-    embedded_request.signatures[0].signature_id
+    embedded = client.get_embedded_sign_url :signature_id => '72f17b7a021381aebc7681a638371bbe'
+    @sign_url = embedded.sign_url
+    render :embedded_signature
   end
 
 end
