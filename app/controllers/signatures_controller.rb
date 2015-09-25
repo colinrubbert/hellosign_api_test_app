@@ -1,6 +1,15 @@
 class SignaturesController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:callbacks]
 
+  def index
+    client = HelloSign::Client.new :api_key => ENV["hellosign_api_key"]
+    @signature_request_list = client.get_signature_requests
+  end
+
+  def show
+
+  end
+
   def new
   end
 
