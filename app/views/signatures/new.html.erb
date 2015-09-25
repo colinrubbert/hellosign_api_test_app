@@ -1,11 +1,15 @@
 <br />
 <br />
 <div class="col-xs-10 col-xs-offset-1 text-center jumbotron">
-  <%= form_tag signatures_path, method: :post do %>
-    <%=label_tag 'Full Name' %><br />
-    <%= text_field_tag :name%><br /><br />
-    <%= label_tag 'Email' %><br />
-    <%= text_field_tag :email_address %><br /><br />
-    <%= submit_tag 'Create Embedded Signature Request' %>
+  <% if current_user.present? %>
+    <%= form_tag signatures_path, method: :post do %>
+      <%= label_tag current_user.full_name %><br />
+      <%= hidden_field_tag("name", current_user.full_name) %><br /><br />
+      <%= label_tag current_user.email %><br />
+      <%= hidden_field_tag("email_address", current_user.email) %><br /><br />
+      <%= submit_tag 'Create Embedded Signature Request' %>
+    <% end %>
+  <% else %>
+    <h4>You need to be logged in to submit your signatures.</h4>
   <% end %>
 </div>

@@ -9,7 +9,14 @@
         url: '<%= @sign_url %>',
         allowCancel: true,
         messageListener: function(eventData) {
-          alert("HelloSign event received");
+          if (eventData.event == HelloSign.EVENT_SIGNED){
+            alert("HelloSign Event Signed");
+            location.href="/"; //this redirects user back to the root of the application after a completed signature
+          }
+          else if (eventData.event == HelloSign.EVENT_CANCELED) {
+            alert("You've Cancelled The Signature");
+            location.href="/signatures/new"; //this redirects user back to the new signature page
+          }
         }
       });
     // ]]>

@@ -22,14 +22,23 @@ class SignaturesController < ApplicationController
     client.create_embedded_signature_request_with_template(
     :test_mode => 1,             #Set to 1 to signify this is just a test
     :client_id => ENV["hellosign_client_id"],
-    :template_id => ENV["agent_w9_form"],
-    :subject => "Your W9 Form",
+    :template_ids => [
+      ENV["agent_w9_form"],
+      ENV["agent_contract_agreement"],
+    ],
+    :title => "Contracts",
+    :subject => "W9 Form and Agent Contract",
     :message => "Please fill out all relevant information, sign, date.",
     :signers => [
         {
           :name => options[:name],
           :email_address => options[:email_address],
           :role => 'Agent'
+        },
+        {
+          :name => 'Colin Rubbert',
+          :email_address => 'colinrubbert@gmail.com',
+          :role => 'TTS CEO'
         }
       ],
     )
@@ -41,7 +50,6 @@ class SignaturesController < ApplicationController
   end
 
   def get_signature_id(embedded_request)
-    # byebug
     embedded_request.signatures[0].signature_id
   end
 
