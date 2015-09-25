@@ -3,7 +3,7 @@ class SignaturesController < ApplicationController
 
   def index
     client = HelloSign::Client.new :api_key => ENV["hellosign_api_key"]
-    @signature_request_list = client.get_signature_requests
+    # @signature_request_list = client.get_signature_requests
   end
 
   def show
@@ -18,7 +18,7 @@ class SignaturesController < ApplicationController
   end
 
   def create
-    embedded_request = create_embedded_request(name: params[:name], email_address: params[:email_address])
+    embedded_request = create_embedded_request(name: params[:name], email_address: params[:email_address], address_number: params[:address_number], city_state_zip: params[:city_state_zip] )
     @sign_url = get_sign_url(embedded_request)
     render :embedded_signature
   end
@@ -50,6 +50,11 @@ class SignaturesController < ApplicationController
           :role => 'TTS CEO'
         }
       ],
+      :custom_fields => {
+        # :name => options[:name],
+        # :address_number => options[:address_number],
+        # :city_state_zip => options[:city_state_zip]
+      }
     )
   end
 
