@@ -18,7 +18,7 @@ class SignaturesController < ApplicationController
   end
 
   def create
-    embedded_request = create_embedded_request(name: params[:name], email_address: params[:email_address], business_name: params[:business_name], address_number: params[:address_number], city_state_zip: params[:city_state_zip] )
+    embedded_request = create_embedded_request(agent_name: params[:agent_name], email_address: params[:email_address], business_name: params[:business_name], address_number: params[:address_number], city_state_zip: params[:city_state_zip], bank_name: params[:bank_name], bank_routing_number: params[:bank_routing_number], bank_account_number: params[:bank_account_number], checking_account: params[:checking_account], savings_account: params[:savings_account] )
     @sign_url = get_sign_url(embedded_request)
     render :embedded_signature
   end
@@ -34,13 +34,14 @@ class SignaturesController < ApplicationController
     :template_ids => [
       ENV["agent_w9_form"],
       ENV["agent_contract_agreement"],
+      ENV["agent_direct_deposit_form"]
     ],
     :title => "Contracts",
     :subject => "W9 Form and Agent Contract",
     :message => "Please fill out all relevant information, sign, date.",
     :signers => [
         {
-          :name => options[:name],
+          :name => options[:agent_name],
           :email_address => options[:email_address],
           :role => 'Agent'
         },
@@ -51,10 +52,15 @@ class SignaturesController < ApplicationController
         }
       ],
       :custom_fields => {
-        :name => options[:name],
+        :agent_name => options[:agent_name],
         :business_name => options[:business_name],
         :address_number => options[:address_number],
-        :city_state_zip => options[:city_state_zip]
+        :city_state_zip => options[:city_state_zip],
+        :bank_name => options[:bank_name],
+        :bank_routing_number => options[:bank_routing_number],
+        :bank_account_number => options[:bank_account_number],
+        :checking_account => options[:checking_account],
+        :savings_account => options[:savings_account]
       }
     )
   end

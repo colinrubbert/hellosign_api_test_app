@@ -12,7 +12,7 @@
   <% else %>
     <%= form_tag signatures_path, method: :post do %>
       <%= label_tag "Full Name" %><br />
-      <%= text_field_tag(:name) %><br /><br />
+      <%= text_field_tag(:agent_name) %><br /><br />
       <%= label_tag "Email" %><br />
       <%= text_field_tag(:email_address) %><br /><br />
       <%= label_tag "Business Name" %><br />
@@ -21,6 +21,12 @@
       <%= text_field_tag(:address_number) %><br /><br />
       <%= label_tag "City, State, and Zip Code" %><br />
       <%= text_field_tag(:city_state_zip) %><br /><br />
+      <%= label_tag "Bank Name" %><br />
+      <%= text_field_tag(:bank_name) %><br /><br />
+      <%= label_tag "Bank Routing Number" %><br />
+      <%= text_field_tag(:bank_routing_number) %><br /><br />
+      <%= label_tag "Bank Account Number" %><br />
+      <%= text_field_tag(:bank_account_number) %><br /><br />
       <%= submit_tag 'Create Embedded Signature Request' %>
     <% end %>
   <% end %>
