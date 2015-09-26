@@ -18,7 +18,7 @@ class SignaturesController < ApplicationController
   end
 
   def create
-    embedded_request = create_embedded_request(name: params[:name], email_address: params[:email_address], address_number: params[:address_number], city_state_zip: params[:city_state_zip] )
+    embedded_request = create_embedded_request(name: params[:name], email_address: params[:email_address], business_name: params[:business_name], address_number: params[:address_number], city_state_zip: params[:city_state_zip] )
     @sign_url = get_sign_url(embedded_request)
     render :embedded_signature
   end
@@ -51,9 +51,10 @@ class SignaturesController < ApplicationController
         }
       ],
       :custom_fields => {
-        # :name => options[:name],
-        # :address_number => options[:address_number],
-        # :city_state_zip => options[:city_state_zip]
+        :name => options[:name],
+        :business_name => options[:business_name],
+        :address_number => options[:address_number],
+        :city_state_zip => options[:city_state_zip]
       }
     )
   end

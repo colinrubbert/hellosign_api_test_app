@@ -15,9 +15,11 @@
       <%= text_field_tag(:name) %><br /><br />
       <%= label_tag "Email" %><br />
       <%= text_field_tag(:email_address) %><br /><br />
+      <%= label_tag "Business Name" %><br />
+      <%= text_field_tag(:business_name) %><br /><br />
       <%= label_tag "Street Address" %><br />
       <%= text_field_tag(:address_number) %><br /><br />
-      <%= label_tag "City, State, and Zip" %><br />
+      <%= label_tag "City, State, and Zip Code" %><br />
       <%= text_field_tag(:city_state_zip) %><br /><br />
       <%= submit_tag 'Create Embedded Signature Request' %>
     <% end %>
